@@ -140,3 +140,65 @@ $(document).ready(function(){
     });
 
 });
+
+
+
+
+
+
+
+
+
+// light gallery
+
+$(document).ready(function(){
+
+    $('.buttons').click(function(){
+
+        $(this).addClass('active').siblings().removeClass('active');
+
+        var filter = $(this).attr('data-filter')
+
+        if(filter == 'all'){
+            $('.image').show(400);
+        }else{
+            $('.image').not('.'+filter).hide(200);
+            $('.image').filter('.'+filter).show(400);
+        }
+
+    });
+
+    $('.gallery').magnificPopup({
+
+        delegate:'a',
+        type:'image',
+        gallery:{
+            enabled:true
+        }
+
+    });
+
+});
+
+
+
+
+
+// order functions 
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize LightGallery
+    lightGallery(document.getElementById("lightgallery"));
+
+    // Order Now Button Click Event
+    document.querySelectorAll(".order-btn").forEach(button => {
+        button.addEventListener("click", function() {
+            let imageName = this.getAttribute("data-image");
+            let phoneNumber = "918524960408"; // Replace with your WhatsApp number
+            let message = `Hello, I want to order this product: ${imageName}`;
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappURL, "_blank");
+        });
+    });
+});
