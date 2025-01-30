@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LightGallery with Pagination</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <style>
+        .gallery-item { cursor: pointer; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">LightGallery with Pagination</h2>
+    
+    <!-- LightGallery Container -->
+    <div id="lightGallery" class="row">
+        <!-- Images dynamically shown by JS -->
+    </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center mt-4">
+            <li class="page-item"><a class="page-link" href="#" onclick="changePage(1)">1</a></li>
+            <li class="page-item"><a class="page-link" href="#" onclick="changePage(2)">2</a></li>
+            <li class="page-item"><a class="page-link" href="#" onclick="changePage(3)">3</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+<script>
+    // Gallery images
+    const images = [
+        'https://source.unsplash.com/random/300x300?sig=1',
+        'https://source.unsplash.com/random/300x300?sig=2',
+        'https://source.unsplash.com/random/300x300?sig=3',
+        'https://source.unsplash.com/random/300x300?sig=4',
+        'https://source.unsplash.com/random/300x300?sig=5',
+        'https://source.unsplash.com/random/300x300?sig=6',
+        'https://source.unsplash.com/random/300x300?sig=7',
+        'https://source.unsplash.com/random/300x300?sig=8',
+        'https://source.unsplash.com/random/300x300?sig=9',
+        'https://source.unsplash.com/random/300x300?sig=10',
+        'https://source.unsplash.com/random/300x300?sig=11',
+        'https://source.unsplash.com/random/300x300?sig=12',
+        'https://source.unsplash.com/random/300x300?sig=13',
+        'https://source.unsplash.com/random/300x300?sig=14',
+        'https://source.unsplash.com/random/300x300?sig=15',
+        'https://source.unsplash.com/random/300x300?sig=16',
+        'https://source.unsplash.com/random/300x300?sig=17',
+        'https://source.unsplash.com/random/300x300?sig=18',
+        'https://source.unsplash.com/random/300x300?sig=19',
+        'https://source.unsplash.com/random/300x300?sig=20',
+        'https://source.unsplash.com/random/300x300?sig=21',
+        'https://source.unsplash.com/random/300x300?sig=22',
+        'https://source.unsplash.com/random/300x300?sig=23',
+        'https://source.unsplash.com/random/300x300?sig=24',
+        'https://source.unsplash.com/random/300x300?sig=25',
+        'https://source.unsplash.com/random/300x300?sig=26',
+        'https://source.unsplash.com/random/300x300?sig=27',
+        'https://source.unsplash.com/random/300x300?sig=28',
+        'https://source.unsplash.com/random/300x300?sig=29',
+        'https://source.unsplash.com/random/300x300?sig=30'
+    ];
+
+    let currentPage = 1;
+    const itemsPerPage = 10;
+
+    function changePage(page) {
+        currentPage = page;
+        renderGallery();
+    }
+
+    function renderGallery() {
+        const galleryContainer = document.getElementById('lightGallery');
+        galleryContainer.innerHTML = ''; // Clear previous images
+
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        images.slice(start, end).forEach((src, index) => {
+            const imgHtml = `
+                <div class="col-md-4 mb-3 gallery-item">
+                    <a href="${src}">
+                        <img src="${src}" class="img-fluid rounded">
+                    </a>
+                </div>
+            `;
+            galleryContainer.innerHTML += imgHtml;
+        });
+
+        lightGallery(document.getElementById('lightGallery')); // Initialize LightGallery
+    }
+
+    // Load first page
+    document.addEventListener('DOMContentLoaded', () => {
+        renderGallery();
+    });
+</script>
+
+</body>
+</html>
